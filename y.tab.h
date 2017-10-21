@@ -1,0 +1,64 @@
+#ifndef Y_TAB_H
+#define Y_TAB_H
+
+#define IDENTIFIER 257
+#define CONSTANT 258
+#define STRING_LITERAL 259
+#define SIZEOF 260
+#define PTR_OP 261
+#define INC_OP 262
+#define DEC_OP 263
+#define LEFT_OP 264
+#define RIGHT_OP 265
+#define LE_OP 266
+#define GE_OP 267
+#define EQ_OP 268
+#define NE_OP 269
+#define AND_OP 270
+#define OR_OP 271
+#define MUL_ASSIGN 272
+#define DIV_ASSIGN 273
+#define MOD_ASSIGN 274
+#define ADD_ASSIGN 275
+#define SUB_ASSIGN 276
+#define LEFT_ASSIGN 277
+#define RIGHT_ASSIGN 278
+#define AND_ASSIGN 279
+#define XOR_ASSIGN 280
+#define OR_ASSIGN 281
+#define TYPEDEF 282
+#define EXTERN 283
+#define STATIC 284
+#define AUTO 285
+#define REGISTER 286
+#define INLINE 287
+#define RESTRICT 288
+#define CHAR 289
+#define SHORT 290
+#define INT 291
+#define LONG 292
+#define SIGNED 293
+#define UNSIGNED 294
+#define FLOAT 295
+#define DOUBLE 296
+#define CONST 297
+#define VOLATILE 298
+#define VOID 299
+#define STRUCT 300
+#define UNION 301
+#define ENUM 302
+#define ELLIPSIS 303
+#define CASE 304
+#define DEFAULT 305
+#define IF 306
+#define ELSE 307
+#define SWITCH 308
+#define WHILE 309
+#define DO 310
+#define FOR 311
+#define GOTO 312
+#define CONTINUE 313
+#define BREAK 314
+#define RETURN 315
+
+#endif
