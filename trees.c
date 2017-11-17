@@ -2,8 +2,7 @@
 #include "util.h"
 
 /**
- *
- *
+ * program - creates a program and initializes the node
  */
 A_program program(int lineno, A_func_dec_list func_decs)
 {
@@ -15,8 +14,7 @@ A_program program(int lineno, A_func_dec_list func_decs)
 }
 
 /**
- *
- *
+ * variable_dec - creates a variable declaration node
  */
 A_var_dec variable_dec(int lineno, char *type, char *name, int array)
 {
@@ -30,8 +28,7 @@ A_var_dec variable_dec(int lineno, char *type, char *name, int array)
 }
 
 /**
- *
- *
+ * variable_dec_list - creates a and initializes values for a variable declaration list
  */
 A_var_dec_list variable_dec_list(int lineno, A_var_dec first, A_var_dec_list next)
 {
@@ -44,8 +41,7 @@ A_var_dec_list variable_dec_list(int lineno, A_var_dec first, A_var_dec_list nex
 }
 
 /**
- *
- *
+ * function_def - creates a node for function declarations
  */
 A_func_dec function_def(int lineno, char *return_type, char *name, A_param_list params, A_statement_list body)
 {
@@ -61,8 +57,7 @@ A_func_dec function_def(int lineno, char *return_type, char *name, A_param_list 
 }
 
 /**
- *
- *
+ * prototype - creates a node for prototype declarations
  */
 A_func_dec prototype(int lineno, char *return_type, char *name, A_param_list params)
 {
@@ -77,8 +72,7 @@ A_func_dec prototype(int lineno, char *return_type, char *name, A_param_list par
 }
 
 /**
- *
- *
+ * function_dec_list - creates a node for function declaration lists
  */
 A_func_dec_list function_dec_list(int lineno, A_func_dec first, A_func_dec_list next)
 {
@@ -91,8 +85,7 @@ A_func_dec_list function_dec_list(int lineno, A_func_dec first, A_func_dec_list 
 }
 
 /**
- *
- *
+ * parameter - creates a node for holding parameter information
  */
 A_param parameter(int lineno, char *type, char *name, int array)
 {
@@ -106,8 +99,7 @@ A_param parameter(int lineno, char *type, char *name, int array)
 }
 
 /**
- *
- *
+ * parameter_list - creates a node for a list of parameters
  */
 A_param_list parameter_list(int lineno, A_param first, A_param_list next)
 {
@@ -120,8 +112,7 @@ A_param_list parameter_list(int lineno, A_param first, A_param_list next)
 }
 
 /**
- *
- *
+ * assign_statement - creates an expression node for assignment statements
  */
 A_statement assign_statement(int lineno, A_variable lval, A_expression rval)
 {
@@ -135,8 +126,7 @@ A_statement assign_statement(int lineno, A_variable lval, A_expression rval)
 }
 
 /**
- *
- *
+ * var_dec_statement - node to hold information about variable declaration
  */
 A_statement var_dec_statement(int lineno, char *type, char *name, int array, A_expression init)
 {
@@ -152,8 +142,7 @@ A_statement var_dec_statement(int lineno, char *type, char *name, int array, A_e
 }
 
 /**
- *
- *
+ * block_statement - creates a node for block statements
  */
 A_statement block_statement(int lineno, A_statement_list statements)
 {
@@ -166,8 +155,7 @@ A_statement block_statement(int lineno, A_statement_list statements)
 }
 
 /**
- *
- *
+ * call_statement - creates a node for call statements
  */
 A_statement call_statement(int lineno, char *name, A_expression_list actuals)
 {

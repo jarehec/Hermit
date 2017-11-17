@@ -13,6 +13,9 @@ void print_param(int indent, A_param param);
 void print_statement_list(int indent, A_statement_list statements);
 void print_statement(int indent, A_statement statement);
 
+/**
+ * print_expression - prints an expression
+*/
 void print_expression(int indent, A_expression exp)
 {
 	switch(exp->type)
@@ -28,6 +31,9 @@ void print_expression(int indent, A_expression exp)
 	}
 }
 
+/**
+ * print_statement - prints a statement
+ */
 void print_statement(int indent, A_statement statement)
 {
 	switch(statement->type)
@@ -70,6 +76,9 @@ void print_statement(int indent, A_statement statement)
 	}
 }
 
+/**
+ * print_statement_list - prints a statement list
+ */
 void print_statement_list(int indent, A_statement_list statements)
 {
 	if (!statements)
@@ -78,6 +87,9 @@ void print_statement_list(int indent, A_statement_list statements)
 	print_statement_list(indent, statements->next);
 }
 
+/**
+ * print_param - prints parameter
+ */
 void print_param(int indent, A_param param)
 {
 	print_indent(indent, param->lineno);
@@ -85,6 +97,9 @@ void print_param(int indent, A_param param)
 	puts("");
 }
 
+/**
+ * print_param_list - prints a parameter list
+ */
 void print_param_list(int indent, A_param_list params)
 {
 	if (!params)
@@ -93,6 +108,9 @@ void print_param_list(int indent, A_param_list params)
 	print_param_list(indent, params->next);
 }
 
+/**
+ * print_func_dec - prints a function declaration
+*/
 void print_func_dec(int indent, A_func_dec function)
 {
 	if (!function)
@@ -128,6 +146,9 @@ void print_func_dec(int indent, A_func_dec function)
 		printf("Error in function declaration at line: %d\n", function->lineno);
 }
 
+/**
+ * print_indent - prints indent
+ */
 void print_indent(int indent, int lineno)
 {
 	int i;
@@ -138,6 +159,9 @@ void print_indent(int indent, int lineno)
 	fflush(stdout);
 }
 
+/**
+ * print_function_decs - prints a function declaration list
+ */
 void print_function_decs(int indent, A_func_dec_list functions)
 {
 	if (!functions)
@@ -146,11 +170,17 @@ void print_function_decs(int indent, A_func_dec_list functions)
 	print_function_decs(indent, functions->next);
 }
 
+/**
+ * print_tree - entrty point for printing program
+ */
 void print_tree(A_program program)
 {
 	print_function_decs(0, program->function_decs);
 }
 
+/**
+ * set_indent - sets the indent size
+ */
 void set_indent(int new_indent)
 {
 	indentstep = new_indent;

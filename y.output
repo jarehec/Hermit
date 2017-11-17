@@ -1,0 +1,544 @@
+   0  $accept : program $end
+
+   1  value : DIGIT
+
+   2  type : INT
+   3       | CHAR
+   4       | VOID
+
+   5  multiplicative_expression : value
+   6                            | multiplicative_expression '*' value
+   7                            | multiplicative_expression '/' value
+
+   8  additive_expression : multiplicative_expression
+   9                      | additive_expression '+' multiplicative_expression
+  10                      | additive_expression '-' multiplicative_expression
+
+  11  expression : additive_expression
+
+  12  assignment_statement : IDENTIFIER '=' expression ';'
+
+  13  declaration : type IDENTIFIER ';'
+  14              | type IDENTIFIER '=' expression ';'
+
+  15  return_statement : RETURN ';'
+  16                   | RETURN '(' value ')' ';'
+
+  17  statements : assignment_statement
+  18             | return_statement
+
+  19  block_item : declaration
+  20             | statements
+  21             | expression
+
+  22  block_item_list : block_item
+  23                  | block_item_list block_item
+
+  24  block_statements : '{' '}'
+  25                   | '{' block_item_list '}'
+
+  26  params : type
+  27         | type IDENTIFIER
+  28         |
+
+  29  function : type IDENTIFIER '(' params ')' block_statements
+
+  30  function_list : function
+  31                | function function_list
+
+  32  program : function_list
+
+state 0
+	$accept : . program $end  (0)
+
+	CHAR  shift 1
+	INT  shift 2
+	VOID  shift 3
+	.  error
+
+	program  goto 4
+	type  goto 5
+	function_list  goto 6
+	function  goto 7
+
+
+state 1
+	type : CHAR .  (3)
+
+	.  reduce 3
+
+
+state 2
+	type : INT .  (2)
+
+	.  reduce 2
+
+
+state 3
+	type : VOID .  (4)
+
+	.  reduce 4
+
+
+state 4
+	$accept : program . $end  (0)
+
+	$end  accept
+
+
+state 5
+	function : type . IDENTIFIER '(' params ')' block_statements  (29)
+
+	IDENTIFIER  shift 8
+	.  error
+
+
+state 6
+	program : function_list .  (32)
+
+	.  reduce 32
+
+
+state 7
+	function_list : function .  (30)
+	function_list : function . function_list  (31)
+
+	CHAR  shift 1
+	INT  shift 2
+	VOID  shift 3
+	$end  reduce 30
+
+	type  goto 5
+	function_list  goto 9
+	function  goto 7
+
+
+state 8
+	function : type IDENTIFIER . '(' params ')' block_statements  (29)
+
+	'('  shift 10
+	.  error
+
+
+state 9
+	function_list : function function_list .  (31)
+
+	.  reduce 31
+
+
+state 10
+	function : type IDENTIFIER '(' . params ')' block_statements  (29)
+	params : .  (28)
+
+	CHAR  shift 1
+	INT  shift 2
+	VOID  shift 3
+	')'  reduce 28
+
+	type  goto 11
+	params  goto 12
+
+
+state 11
+	params : type .  (26)
+	params : type . IDENTIFIER  (27)
+
+	IDENTIFIER  shift 13
+	')'  reduce 26
+
+
+state 12
+	function : type IDENTIFIER '(' params . ')' block_statements  (29)
+
+	')'  shift 14
+	.  error
+
+
+state 13
+	params : type IDENTIFIER .  (27)
+
+	.  reduce 27
+
+
+state 14
+	function : type IDENTIFIER '(' params ')' . block_statements  (29)
+
+	'{'  shift 15
+	.  error
+
+	block_statements  goto 16
+
+
+state 15
+	block_statements : '{' . '}'  (24)
+	block_statements : '{' . block_item_list '}'  (25)
+
+	CHAR  shift 1
+	INT  shift 2
+	VOID  shift 3
+	RETURN  shift 17
+	DIGIT  shift 18
+	IDENTIFIER  shift 19
+	'}'  shift 20
+	.  error
+
+	type  goto 21
+	value  goto 22
+	expression  goto 23
+	additive_expression  goto 24
+	multiplicative_expression  goto 25
+	block_item_list  goto 26
+	block_item  goto 27
+	assignment_statement  goto 28
+	return_statement  goto 29
+	statements  goto 30
+	declaration  goto 31
+
+
+state 16
+	function : type IDENTIFIER '(' params ')' block_statements .  (29)
+
+	.  reduce 29
+
+
+state 17
+	return_statement : RETURN . ';'  (15)
+	return_statement : RETURN . '(' value ')' ';'  (16)
+
+	';'  shift 32
+	'('  shift 33
+	.  error
+
+
+state 18
+	value : DIGIT .  (1)
+
+	.  reduce 1
+
+
+state 19
+	assignment_statement : IDENTIFIER . '=' expression ';'  (12)
+
+	'='  shift 34
+	.  error
+
+
+state 20
+	block_statements : '{' '}' .  (24)
+
+	.  reduce 24
+
+
+state 21
+	declaration : type . IDENTIFIER ';'  (13)
+	declaration : type . IDENTIFIER '=' expression ';'  (14)
+
+	IDENTIFIER  shift 35
+	.  error
+
+
+state 22
+	multiplicative_expression : value .  (5)
+
+	.  reduce 5
+
+
+state 23
+	block_item : expression .  (21)
+
+	.  reduce 21
+
+
+state 24
+	additive_expression : additive_expression . '+' multiplicative_expression  (9)
+	additive_expression : additive_expression . '-' multiplicative_expression  (10)
+	expression : additive_expression .  (11)
+
+	'+'  shift 36
+	'-'  shift 37
+	CHAR  reduce 11
+	INT  reduce 11
+	VOID  reduce 11
+	RETURN  reduce 11
+	DIGIT  reduce 11
+	IDENTIFIER  reduce 11
+	';'  reduce 11
+	'}'  reduce 11
+
+
+state 25
+	multiplicative_expression : multiplicative_expression . '*' value  (6)
+	multiplicative_expression : multiplicative_expression . '/' value  (7)
+	additive_expression : multiplicative_expression .  (8)
+
+	'*'  shift 38
+	'/'  shift 39
+	CHAR  reduce 8
+	INT  reduce 8
+	VOID  reduce 8
+	RETURN  reduce 8
+	DIGIT  reduce 8
+	IDENTIFIER  reduce 8
+	'+'  reduce 8
+	'-'  reduce 8
+	';'  reduce 8
+	'}'  reduce 8
+
+
+state 26
+	block_item_list : block_item_list . block_item  (23)
+	block_statements : '{' block_item_list . '}'  (25)
+
+	CHAR  shift 1
+	INT  shift 2
+	VOID  shift 3
+	RETURN  shift 17
+	DIGIT  shift 18
+	IDENTIFIER  shift 19
+	'}'  shift 40
+	.  error
+
+	type  goto 21
+	value  goto 22
+	expression  goto 23
+	additive_expression  goto 24
+	multiplicative_expression  goto 25
+	block_item  goto 41
+	assignment_statement  goto 28
+	return_statement  goto 29
+	statements  goto 30
+	declaration  goto 31
+
+
+state 27
+	block_item_list : block_item .  (22)
+
+	.  reduce 22
+
+
+state 28
+	statements : assignment_statement .  (17)
+
+	.  reduce 17
+
+
+state 29
+	statements : return_statement .  (18)
+
+	.  reduce 18
+
+
+state 30
+	block_item : statements .  (20)
+
+	.  reduce 20
+
+
+state 31
+	block_item : declaration .  (19)
+
+	.  reduce 19
+
+
+state 32
+	return_statement : RETURN ';' .  (15)
+
+	.  reduce 15
+
+
+state 33
+	return_statement : RETURN '(' . value ')' ';'  (16)
+
+	DIGIT  shift 18
+	.  error
+
+	value  goto 42
+
+
+state 34
+	assignment_statement : IDENTIFIER '=' . expression ';'  (12)
+
+	DIGIT  shift 18
+	.  error
+
+	value  goto 22
+	expression  goto 43
+	additive_expression  goto 24
+	multiplicative_expression  goto 25
+
+
+state 35
+	declaration : type IDENTIFIER . ';'  (13)
+	declaration : type IDENTIFIER . '=' expression ';'  (14)
+
+	'='  shift 44
+	';'  shift 45
+	.  error
+
+
+state 36
+	additive_expression : additive_expression '+' . multiplicative_expression  (9)
+
+	DIGIT  shift 18
+	.  error
+
+	value  goto 22
+	multiplicative_expression  goto 46
+
+
+state 37
+	additive_expression : additive_expression '-' . multiplicative_expression  (10)
+
+	DIGIT  shift 18
+	.  error
+
+	value  goto 22
+	multiplicative_expression  goto 47
+
+
+state 38
+	multiplicative_expression : multiplicative_expression '*' . value  (6)
+
+	DIGIT  shift 18
+	.  error
+
+	value  goto 48
+
+
+state 39
+	multiplicative_expression : multiplicative_expression '/' . value  (7)
+
+	DIGIT  shift 18
+	.  error
+
+	value  goto 49
+
+
+state 40
+	block_statements : '{' block_item_list '}' .  (25)
+
+	.  reduce 25
+
+
+state 41
+	block_item_list : block_item_list block_item .  (23)
+
+	.  reduce 23
+
+
+state 42
+	return_statement : RETURN '(' value . ')' ';'  (16)
+
+	')'  shift 50
+	.  error
+
+
+state 43
+	assignment_statement : IDENTIFIER '=' expression . ';'  (12)
+
+	';'  shift 51
+	.  error
+
+
+state 44
+	declaration : type IDENTIFIER '=' . expression ';'  (14)
+
+	DIGIT  shift 18
+	.  error
+
+	value  goto 22
+	expression  goto 52
+	additive_expression  goto 24
+	multiplicative_expression  goto 25
+
+
+state 45
+	declaration : type IDENTIFIER ';' .  (13)
+
+	.  reduce 13
+
+
+state 46
+	multiplicative_expression : multiplicative_expression . '*' value  (6)
+	multiplicative_expression : multiplicative_expression . '/' value  (7)
+	additive_expression : additive_expression '+' multiplicative_expression .  (9)
+
+	'*'  shift 38
+	'/'  shift 39
+	CHAR  reduce 9
+	INT  reduce 9
+	VOID  reduce 9
+	RETURN  reduce 9
+	DIGIT  reduce 9
+	IDENTIFIER  reduce 9
+	'+'  reduce 9
+	'-'  reduce 9
+	';'  reduce 9
+	'}'  reduce 9
+
+
+state 47
+	multiplicative_expression : multiplicative_expression . '*' value  (6)
+	multiplicative_expression : multiplicative_expression . '/' value  (7)
+	additive_expression : additive_expression '-' multiplicative_expression .  (10)
+
+	'*'  shift 38
+	'/'  shift 39
+	CHAR  reduce 10
+	INT  reduce 10
+	VOID  reduce 10
+	RETURN  reduce 10
+	DIGIT  reduce 10
+	IDENTIFIER  reduce 10
+	'+'  reduce 10
+	'-'  reduce 10
+	';'  reduce 10
+	'}'  reduce 10
+
+
+state 48
+	multiplicative_expression : multiplicative_expression '*' value .  (6)
+
+	.  reduce 6
+
+
+state 49
+	multiplicative_expression : multiplicative_expression '/' value .  (7)
+
+	.  reduce 7
+
+
+state 50
+	return_statement : RETURN '(' value ')' . ';'  (16)
+
+	';'  shift 53
+	.  error
+
+
+state 51
+	assignment_statement : IDENTIFIER '=' expression ';' .  (12)
+
+	.  reduce 12
+
+
+state 52
+	declaration : type IDENTIFIER '=' expression . ';'  (14)
+
+	';'  shift 54
+	.  error
+
+
+state 53
+	return_statement : RETURN '(' value ')' ';' .  (16)
+
+	.  reduce 16
+
+
+state 54
+	declaration : type IDENTIFIER '=' expression ';' .  (14)
+
+	.  reduce 14
+
+
+71 terminals, 17 nonterminals
+33 grammar rules, 55 states

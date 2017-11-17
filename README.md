@@ -1,12 +1,8 @@
-#  Hermit - C Compiler
-
 ![](https://i.imgur.com/E9ymbLX.png)
+#  Hermit - C Compiler
 
 ## Environment
 * Ubuntu 14.04
 
-
 ### Information
-Todo
-## License
-Public Domain, no copyright protection
+Hermit is a toy compiler for the C programming language. 

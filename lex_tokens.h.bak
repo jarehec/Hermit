@@ -1,0 +1,63 @@
+#ifndef TOKENS_H
+#define TOKENS_H
+
+/* keywords */
+#define AUTO			300
+#define BREAK			301
+#define CASE			302
+#define CHAR			303
+#define CONST			304
+#define CONTINUE		305
+#define DEFAULT			306
+#define DO				307
+#define DOUBLE			308
+#define ELSE			309
+#define ENUM			310
+#define EXTERN			311
+#define FLOAT			312
+#define FOR				313
+#define GOTO			314
+#define IF				315
+#define INLINE			316
+#define INT				317
+#define LONG			318
+#define REGISTER		319
+#define RESTRICT		320
+#define RETURN			321
+#define SHORT			322
+#define SIGNED			323
+#define SIZEOF			324
+#define STATIC			325
+#define STRUCT			326
+#define SWITCH			327
+#define TYPEDEF			328
+#define UNION			329
+#define UNSIGNED		330
+#define VOID			331
+#define VOLATILE		332
+#define WHILE			333
+/* operators */
+#define ELLIPSIS		334
+#define RIGHT_ASSIGN	335
+#define LEFT_ASSIGN		336
+#define ADD_ASSIGN		337
+#define SUB_ASSIGN		338
+#define MUL_ASSIGN		339
+#define DIV_ASSIGN		340
+#define MOD_ASSIGN		341
+#define AND_ASSIGN		342
+#define XOR_ASSIGN		343
+#define OR_ASSIGN		344
+#define RIGHT_OP		345
+#define LEFT_OP 		346
+#define INC_OP			347
+#define DEC_OP			348
+#define PTR_OP			349
+#define AND_OP			350
+#define OR_OP			351
+#define LE_OP			352
+#define GE_OP			353
+#define EQ_OP			354
+#define NE_OP			355
+
+#endif
